@@ -2,8 +2,11 @@ package space.harbour.java.hw4;
 
 import java.io.StringReader;
 import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
+import javax.json.JsonWriter;
 
 
 public class Movies implements Jsonable {
