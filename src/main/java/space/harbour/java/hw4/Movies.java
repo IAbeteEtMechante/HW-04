@@ -35,7 +35,9 @@ public class Movies implements Jsonable {
 
         @Override
         public JsonObject toJsonObject() {
-            return null;
+            return Json.createObjectBuilder()
+                    .add("Name", name)
+                    .build();
         }
 
         @Override
@@ -61,7 +63,10 @@ public class Movies implements Jsonable {
 
         @Override
         public JsonObject toJsonObject() {
-            return null;
+            return Json.createObjectBuilder()
+                    .add("Name", name)
+                    .add("Type", type)
+                    .build();
         }
 
         @Override
@@ -84,7 +89,10 @@ public class Movies implements Jsonable {
 
         @Override
         public JsonObject toJsonObject() {
-            return null;
+            return Json.createObjectBuilder()
+                    .add("Name", name)
+                    .add("As", as)
+                    .build();
         }
 
         @Override
@@ -109,7 +117,11 @@ public class Movies implements Jsonable {
 
         @Override
         public JsonObject toJsonObject() {
-            return null;
+            return Json.createObjectBuilder()
+                    .add("Source", source)
+                    .add("Value", value)
+                    .add("Votes", votes)
+                    .build();
         }
 
         @Override
