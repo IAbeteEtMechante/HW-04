@@ -1,5 +1,9 @@
 package space.harbour.java.hw4;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.StringReader;
 import javax.json.Json;
 import javax.json.JsonArray;
@@ -135,12 +139,67 @@ public class Movies implements Jsonable {
 
     @Override
     public JsonObject toJsonObject() {
-        return null;
+        JsonArrayBuilder genresBuilder = Json.createArrayBuilder();
+        for (String genre : genres) {
+            genresBuilder.add(genre);
+        }
+
+        JsonArrayBuilder writersBuilder = Json.createArrayBuilder();
+        for (Writer writer : writers) {
+            writersBuilder.add(writer.toJsonObject());
+        }
+
+        JsonArrayBuilder actorsBuilder = Json.createArrayBuilder();
+        for (Actor actor : actors) {
+            actorsBuilder.add(actor.toJsonObject());
+        }
+
+        JsonArrayBuilder languagesBuilder = Json.createArrayBuilder();
+        for (String language : languages) {
+            languagesBuilder.add(language);
+        }
+
+        JsonArrayBuilder countriesBuilder = Json.createArrayBuilder();
+        for (String country : countries) {
+            countriesBuilder.add(country);
+        }
+
+        JsonArrayBuilder ratingsBuilder = Json.createArrayBuilder();
+        for (Rating rating : ratings) {
+            ratingsBuilder.add(rating.toJsonObject());
+        }
+        return Json.createObjectBuilder()
+                .add("Title", title)
+                .add("Year", year)
+                .add("Released", released)
+                .add("Runtime", runtime)
+                .add("Genres", genresBuilder.build())
+                .add("Director", director.toJsonObject())
+                .add("Writers", writersBuilder.build())
+                .add("Actors", actorsBuilder.build())
+                .add("Plot", plot)
+                .add("Languages", languagesBuilder.build())
+                .add("Countries", countriesBuilder.build())
+                .add("Awards", awards)
+                .add("Poster", poster)
+                .add("Ratings", ratingsBuilder.build())
+                .build();
     }
 
     @Override
     public String toJsonString() {
         return this.toJsonObject().toString();
+    }
+
+    public static void writeJsonToFile(JsonObject jsonObj, String fileName) throws IOException {
+        fileName += "./src/main/java/space/harbour/java/hw4/";
+        FileOutputStream fout = new FileOutputStream(fileName);
+        // BufferedOutputStream bout = new BufferedOutputStream(fout);
+        JsonWriter jout = Json.createWriter(fout);
+        jout.writeObject(jsonObj);
+        jout.close();
+        // jout.flush();
+
     }
 
 }
