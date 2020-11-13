@@ -1,5 +1,7 @@
-# HW-02
+# HW-04
+this is the 4th homework for M3-Java (Harbour Space)
 
-Author: Student Name
+Author: Pierre Schwob
 
-![HW-02](https://github.com/vasart/potential-happiness/workflows/HW-02/badge.svg)
+
+![HW-04](https://github.com/IAbeteEtMechante/HW-04/workflows/HW-04/badge.svg)
