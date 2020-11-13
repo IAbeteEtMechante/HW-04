@@ -11,9 +11,17 @@ public class ExampleValue implements Jsonable {
     protected float myFloat = .9f;
     private InsideClass hiddenClass = new InsideClass();
 
+
     class InsideClass implements Jsonable {
         String myString = "XYZ";
         Integer myInt = 1050;
+
+        @Override
+        public String toString() {
+            return "InsideClass{"
+                    + "myString:'" + myString + '\''
+                    + ", myInt:" + myInt + '}';
+        }
 
         @Override
         public JsonObject toJsonObject() {
@@ -27,6 +35,23 @@ public class ExampleValue implements Jsonable {
         public String toJsonString() {
             return toJsonObject().toString();
         }
+
+        public void fromJson(String json) {
+            JsonReader reader = Json.createReader(new StringReader(json));
+            JsonObject jsonObject = reader.readObject();;
+            this.myString = jsonObject.getString("myString");
+            this.myInt = jsonObject.getInt("myInt");
+
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "ExampleValue{"
+                + "myInt:" + myInt
+                + ", myString:'" + myString + '\''
+                + ", myFloat:" + myFloat
+                + ", hiddenClass:" + hiddenClass + '}';
     }
 
     @Override
@@ -52,11 +77,27 @@ public class ExampleValue implements Jsonable {
         this.myFloat = (float) jsonObject.getJsonNumber("myFloat").doubleValue();
 
         this.hiddenClass = new InsideClass();
-        //this.hiddenClass.fromJson(jsonObject.getJsonObject("hiddenClass").toString());
+        this.hiddenClass.fromJson(jsonObject.getJsonObject("hiddenClass").toString());
+    }
+
+    public void modifyVariables() {
+        myInt = 42;
+        myString = "NewString";
+        myFloat = 0.42f;
+        hiddenClass.myInt = 42;
+        hiddenClass.myString = "We can write anything here!";
+
     }
 
     public static void main(String... args) {
         ExampleValue value = new ExampleValue();
         System.out.println(value.toJsonString());
+
+        value.modifyVariables(); // we create this dummy method to try with other variables.
+        ExampleValue valueFromJson = new ExampleValue();
+        valueFromJson.fromJson(value.toJsonString());
+        System.out.println(valueFromJson);
+
+
     }
 }
