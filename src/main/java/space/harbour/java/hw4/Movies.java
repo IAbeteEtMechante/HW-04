@@ -28,7 +28,9 @@ public class Movies implements Jsonable {
 
         @Override
         public String toString() {
-            return null;
+            return "Director{"
+                    + "name='" + name + '\''
+                    + '}';
         }
 
         @Override
@@ -51,7 +53,10 @@ public class Movies implements Jsonable {
 
         @Override
         public String toString() {
-            return null;
+            return "Writer{"
+                    + "name='" + name + '\''
+                    + ", type=" + type
+                    + '}';
         }
 
         @Override
@@ -71,7 +76,10 @@ public class Movies implements Jsonable {
 
         @Override
         public String toString() {
-            return null;
+            return "Actor{"
+                    + "name='" + name + '\''
+                    + ", as='" + as + '\''
+                    + '}';
         }
 
         @Override
@@ -92,7 +100,11 @@ public class Movies implements Jsonable {
 
         @Override
         public String toString() {
-            return null;
+            return "Rating{"
+                    + "source='" + source + '\''
+                    + ", value='" + value + '\''
+                    + ", votes='" + votes + '\''
+                    + '}';
         }
 
         @Override
