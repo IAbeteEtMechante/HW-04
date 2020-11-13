@@ -1,9 +1,11 @@
 package space.harbour.java.hw4;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+// import java.lang.ClassNotFoundException;
 import java.io.StringReader;
 import javax.json.Json;
 import javax.json.JsonArray;
@@ -199,6 +201,22 @@ public class Movies implements Jsonable {
         jout.writeObject(jsonObj);
         jout.close();
         // jout.flush();
+
+    }
+
+
+
+
+    public static JsonObject readJsonFromFile(String fileName) 
+                            throws IOException, ClassNotFoundException {
+        FileInputStream fin = new FileInputStream(fileName);
+        BufferedInputStream bin = new BufferedInputStream(fin);
+        JsonReader jin = Json.createReader(bin);
+        return jin.readObject();
+    }
+
+    public static void main(String[] args) {
+
 
     }
 
